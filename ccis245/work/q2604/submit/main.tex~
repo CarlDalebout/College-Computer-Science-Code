@@ -1,0 +1,25 @@
+\input{myquizpreamble}
+\input{ciss240}
+\input{yliow}
+
+\renewcommand\solution[1]{}
+
+\renewcommand\TITLE{Quiz 26-05 \solution{Solution}}
+
+\newcommand\textfootnotesize[1]{{\footnotesize #1}}
+\begin{document}
+\topmatter
+
+Q1. 
+\verb!p! is a pointer to a \verb!double!.
+Write one statement allocating memory (one \verb!double!)
+for \verb!p! to point to.
+\begin{console}
+
+
+
+
+\end{console}
+
+
+\end{document}

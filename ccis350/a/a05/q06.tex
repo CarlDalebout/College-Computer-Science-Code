@@ -1,0 +1,47 @@
+[Quicksort] 
+
+Implement the quicksort algorithm in \cpp, using the 
+algorithm I mentioned in class (the inplace version).
+The following is the prototype:
+\begin{console}[frame=single, fontsize=\footnotesize]
+template < typename T >
+void quicksort(T * start, T * end, bool verbose=false);
+
+template < typename T, typename C >
+void quicksort(T * start, T * end, const C & less, bool verbose=false);
+\end{console}
+You must use the median of three method to pick the pivot
+and the partitioning
+method I mentioned in class where the pivot is first placed in front
+(the method I called pLRT).
+
+Here's the expected verbose printing
+\begin{Verbatim}[fontsize=\footnotesize,frame=single]
+quicksort({3, 1, 5, 6, 4, 2})
+pivot = 3
+left = {1, 2}
+right = {5, 6, 4}
+    quicksort({1, 2})
+    pivot = 2
+    left = {1}
+    right = {}
+        quicksort({1})
+        return {1}
+        quicksort({})
+        return {}
+    combine({1}, 2, {}) = {1, 2}
+    return {1, 2}
+    quicksort({5, 6, 4}
+    pivot = 5
+    left = {4}
+    right = {6}
+        quicksort({4})
+        return {4}
+        quicksort({6})
+        return {6} 
+    combine({4}, 5, {6}) = {4, 5, 6}
+    return {4, 5, 6}
+combine({1, 2}, 3, {4, 5, 6}) = {1, 2, 3, 4, 5, 6}
+return {1, 2, 3, 4, 5, 6}
+\end{Verbatim}
+(I'm assuming the pivots are chosen from the following sequence: 3, 2, 5)

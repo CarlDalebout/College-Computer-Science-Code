@@ -1,0 +1,33 @@
+\input{thispreamble.tex}
+
+\renewcommand\AUTHOR{cadalebout1@cougars.ccis.edu} % CHANGE TO YOURS
+
+\begin{document}
+\topmattertwo
+
+%------------------------------------------------------------------------------
+\nextq
+At a specific point in time during the execution of 
+a program, the memory model of the variables look like this: 
+\begin{python}
+from diagram1 import *
+\end{python}
+Write statements that will cause the memory model to become
+(some variable(s) not shown):
+\begin{python}
+from diagram2 import *
+\end{python}
+(You need a temporary variable. You may assume there are no other
+pointers declare in the current block scope.)
+\\
+\textsc{Answer:}\vspace{-2mm}
+\begin{answercode}
+int *t = p;
+p = q;
+q = t;
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\newpage
+\input{instructions.tex}
+\end{document}

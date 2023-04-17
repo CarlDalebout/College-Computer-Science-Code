@@ -1,0 +1,387 @@
+\input{thispreamble.tex}
+
+\renewcommand\AUTHOR{cadalebout1@cougars.ccis.edu} % CHANGE TO YOURS
+
+\begin{document}
+\topmattertwo
+
+%------------------------------------------------------------------------------
+\nextq
+A hunter lives in the Wumpus world, which is a 4-by-4 grid.
+He/she walks in the direction he/she is facing.
+Initially he/she is facing N (north).
+In each time step in Wumpus world, the hunter
+(1) randomly selects a direction,
+(2) randomly decides to walk one step (in his/her direction) or not,
+and
+(3) randomly decides to fire one arrow (in his/her direction) or not.
+Here's a test run:
+\begin{Verbatim}[frame=single,fontsize=\footnotesize]
++-+-+-+-+
+| | | | |
++-+-+-+-+
+| | | | |
++-+-+-+-+
+| | | | |
++-+-+-+-+
+|H| | | |
++-+-+-+-+
+Hunter direction: N
+
++-+-+-+-+
+| | | | |
++-+-+-+-+
+| | | | |
++-+-+-+-+
+| | | | |
++-+-+-+-+
+| |H| | |
++-+-+-+-+
+Hunter direction: E
+
++-+-+-+-+
+| | | | |
++-+-+-+-+
+| | | | |
++-+-+-+-+
+| | | | |
++-+-+-+-+
+| |H| | |
++-+-+-+-+
+Hunter direction: S
+
++-+-+-+-+
+| | | | |
++-+-+-+-+
+| |^| | |
++-+-+-+-+
+| |H| | |
++-+-+-+-+
+| | | | |
++-+-+-+-+
+Hunter direction: N
+
++-+-+-+-+
+| |^| | |
++-+-+-+-+
+| | | | |
++-+-+-+-+
+| | |H| |
++-+-+-+-+
+| | | | |
++-+-+-+-+
+Hunter direction: E
+
++-+-+-+-+
+| | | | |
++-+-+-+-+
+| | | | |
++-+-+-+-+
+| | | |H|
++-+-+-+-+
+| | | | |
++-+-+-+-+
+Hunter direction: E
+\end{Verbatim}
+The \verb!^! is the arrow flying in the N direction.
+You should draw the arrow using
+\verb!^!,
+\verb!v!,
+\verb!>!,
+\verb!<! depending on the direction
+N,S,E,W (respectively)
+of flight.
+
+Note that when the hunter fires his/her arrow, the arrow will fly in the
+direction of the hunter (at that point in time).
+The hunter can only fire one arrow (too bad).
+The hunter will also not walk into his arrow.
+
+You are given this:
+\begin{Verbatim}[frame=single,fontsize=\footnotesize]
+// file: WumpusWorld.h
+#ifndef WUMPUSWORLD_H
+#define WUMPUSWORLD_H
+
+#include <iostream>
+
+class WumpusWorld
+{
+public:
+    init();              // initialize so that hunter is at (3,0).
+    println();           // print according to the above format
+    move_hunter();       // 1. randomize a direction rand() % 4 where 0,1,2,3
+                         //    are N,S,E,W for hunter.
+                         // 2. randomize whether to walk or not
+                         // 3. randomize whether to fire arrow or not
+                         // Of course hunter must stay in the world.
+                         // If hunter tries to move N but its row is 0,
+                         // hunter stays put.
+    move_arrow();        // move arrow (if necessary)
+private:
+    char world_[4][4];
+    int hunter_direction_;
+    int arrow_state_;    // 0-N, 1-S, 2-E, 3-W, 4-not fired, 5-hit something
+};
+#endif
+\end{Verbatim}
+
+You want to make the hunter wonder around like this:
+\begin{Verbatim}[frame=single,fontsize=\footnotesize]
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
+#include "WumpusWorld.h"
+
+int main()
+{
+    srand((unsigned int) time(NULL));
+    
+    WumpusWorld ww;
+    ww.init();
+    ww.println();
+    for (int i = 0; i < 50; ++i)
+    {
+        ww.move_hunter();
+        ww.move_arrow();
+        ww.println();
+    }
+    return 0;
+}
+\end{Verbatim}
+Complete the following cpp file that contains the implementation
+of the methods declared in the WumpusWorld class.
+\\
+\textsc{Answer:}\vspace{-2mm}
+\begin{answercode}
+// file: WumpusWorld.cpp
+
+void WumpusWorld::init()
+{
+    for(int i = 0; i < 4; ++i)
+        for(int j = 0; j < 4; ++j)
+        {
+            world_[i][j] = ' ';
+        }
+    world_[3][0] = 'H';
+}
+
+void WumpusWorld::println()
+{
+    std::cout << "+-+-+-+-+\n";
+    for(int i = 0; i < 4; ++i)
+    {
+        for(int j = 0; j < 4; ++j)
+        {
+            std::cout << '|' << world_[i][j];
+        }
+        std::cout << "|\n";
+        std::cout << "+-+-+-+-+\n";
+    }
+}
+
+void WumpusWorld::move_hunter()
+{
+    int dir = rand() % 4;
+    if(rand() % 200 == 1 && arrow_state_ == 4)
+    {
+        arrow_state_ = dir;
+    }
+    if(rand() % 200 == 1)
+    {
+        switch(dir)
+        {
+            case 0:
+                for(int i = 1; i < 4; ++i)
+                {
+                    for(int j = 0; j < 4; ++j)
+                    {
+                        if(world_[i][j] == 'H')
+                        {
+                            if(world_[i][j] == '^' ||
+                               world_[i][j] == 'v' ||
+                               world_[i][j] == '<' ||
+                               world_[i][j] == '>')
+                            {}
+                            else
+                            {
+                                world_[i][j] = ' ';
+                                world_[i-1][j] = 'H';
+                            }
+                        }
+                    }
+                }
+                break;
+            case 1:
+                for(int i = 0; i < 3; ++i)
+                {
+                    for(int j = 0; j < 4; ++j)
+                    {
+                        if(world_[i][j] == 'H')
+                        {
+                            if(world_[i][j] == '^' ||
+                               world_[i][j] == 'v' ||
+                               world_[i][j] == '<' ||
+                               world_[i][j] == '>')
+                            {}
+                            else
+                            {
+                                world_[i][j] = ' ';
+                                world_[i+1][j] = 'H';
+                            }
+                        }
+                    }
+                }
+                break;
+            case 3:
+                for(int i = 0; i < 4; ++i)
+                {
+                    for(int j = 1; j < 4; ++j)
+                    {
+                        if(world_[i][j] == 'H')
+                        {
+                            if(world_[i][j] == '^' ||
+                               world_[i][j] == 'v' ||
+                               world_[i][j] == '<' ||
+                               world_[i][j] == '>')
+                            {}
+                            else
+                            {
+                                world_[i][j] = ' ';
+                                world_[i][j-1] = 'H';
+                            }
+                        }
+                    }
+                }
+                break;
+            case 4:
+                for(int i = 0; i < 4; ++i)
+                {
+                    for(int j = 0; j < 3; ++j)
+                    {
+                        if(world_[i][j] == 'H')
+                        {
+                            if(world_[i][j] == '^' ||
+                               world_[i][j] == 'v' ||
+                               world_[i][j] == '<' ||
+                               world_[i][j] == '>')
+                            {}
+                            else
+                            {
+                                world_[i][j] = ' ';
+                                world_[i][j+1] = 'H';
+                            }
+                        }
+                    }
+                }
+                break;
+        }
+    }
+}
+
+void WumpusWorld::move_arrow()
+{
+    bool moved = false;
+    switch(arrow_state_)
+    {
+        case 0://north
+        for(int i = 0; i < 4; i++)
+        {
+            for(int j = 0; j < 4; ++j)
+            {
+                if(world_[i][j] == '^' && moved = false)
+                {
+                    if(i == 0)
+                    {
+                        arrow_state_ = 4;
+                        world[i][j] = ' ';
+                        move = true;
+                    }
+                    else
+                    {
+                        world_[i][j] = ' ';
+                        world_[i-1][j] = '^';
+                        move = true;
+                    }
+                }
+            }
+        }
+        break;
+        case 1://south
+        for(int i = 0; i < 4; i++)
+        {
+            for(int j = 0; j < 4; ++j)
+            {
+                if(world_[i][j] == 'v' && moved = false)
+                {
+                    if(i == 3)
+                    {
+                        arrow_state_ = 4;
+                        world[i][j] = ' ';
+                        move = true;
+                    }
+                    else
+                    {
+                        world_[i][j] = ' ';
+                        world_[i+1][j] = 'v';
+                        move = true;
+                    }
+                }
+            }
+        }
+        break;
+        case 2:// east
+        for(int i = 0; i < 4; i++)
+        {
+            for(int j = 0; j < 4; ++j)
+            {
+                if(world_[i][j] == '<' && moved = false)
+                {
+                    if(j == 0)
+                    {
+                        arrow_state_ = 4;
+                        world[i][j] = ' ';
+                        move = true;
+                    }
+                    else
+                    {
+                        world_[i][j] = ' ';
+                        world_[i][j-1] = '<';
+                        move = true;
+                    }
+                }
+            }
+        }
+        break;
+        case 3:
+        for(int i = 0; i < 4; i++)
+        {
+            for(int j = 0; j < 4; ++j)
+            {
+                if(world_[i][j] == '^' && moved = false)
+                {
+                    if(j == 3)
+                    {
+                        arrow_state_ = 4;
+                        world[i][j] = ' ';
+                        move = true;
+                    }
+                    else
+                    {
+                        world_[i][j] = ' ';
+                        world_[i][j+1] = '>';
+                        move = true;
+                    }
+                }
+            }
+        }
+        break;
+    }
+}
+
+\end{answercode}
+
+
+\newpage
+\input{instructions.tex}
+\end{document}

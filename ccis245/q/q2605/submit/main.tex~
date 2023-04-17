@@ -1,0 +1,79 @@
+\input{myquizpreamble.tex}
+\input{ciss240.tex}
+\input{yliow}
+\renewcommand\TITLE{Quiz 26-06}
+
+\begin{document}
+\topmatter
+
+Q1. What is the output? (or write ERROR)
+\begin{console}
+int x = 42, y = 24;
+int * p, q;
+
+p = &x;
+q = &y;
+std::cout << *p + *q << '\n';
+\end{console}
+Answer:
+\begin{console}
+
+\end{console}
+
+Q2. What is the output? (or write ERROR)
+\begin{console}
+int a = 0, b = 1, c = 2;
+int & p = &a;
+int & q = &b;
+int & r = &c;
+std::cout << *a + *b - *c << '\n';
+\end{console}
+
+Answer:
+\begin{console}
+
+\end{console}
+
+Q3. What is the output? (or write ERROR)
+\begin{console}
+int x = 1;
+int * p = &x;
+int ** q = &p;
+std::cout << *p + **q << '\n';
+\end{console}
+
+Answer:
+\begin{console}
+
+\end{console}
+
+Q4. What is the output? (or write ERROR)
+\begin{console}
+int x = 1;
+int * p = &x;
+int ** q = &p;
+std::cout << *p / *q << '\n';
+\end{console}
+
+Answer:
+\begin{console}
+
+\end{console}
+
+Q5. What is the output? (or write ERROR)
+\begin{console}
+int x = 0, y = 1;
+int * p = &x;
+int * q = &y;
+int * r;
+
+r = p;
+p = q;
+std::cout << *p << ' ' << *q << ' ' << *r << '\n';
+\end{console}
+
+Answer:
+\begin{console}
+
+\end{console}
+\end{document}

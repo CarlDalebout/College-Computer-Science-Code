@@ -1,0 +1,27 @@
+q01:
+	It would run infanitly.
+
+q02.1:
+	yes example being when there is not enough memory to hold the second process
+
+q02.2:
+	yes when the provided exec does not exist exp. lss in linix
+
+q02.3:
+	it would close the shell because the shell is a running process
+
+q03:
+	160 programs will run it will alway run 2^n*n times
+
+q04:
+	there are 3 x variables in total with the valuse 20 15 10
+
+q05p1:
+	6\n
+	6\n
+
+q05p02:
+	6\n
+
+q06:
+	

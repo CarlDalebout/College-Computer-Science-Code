@@ -1,0 +1,118 @@
+\input{thispreamble.tex}
+
+\renewcommand\AUTHOR{cadalebout1@cougars.ccis.edu} % CHANGE TO YOURS
+
+\begin{document}
+\topmattertwo
+
+%------------------------------------------------------------------------------
+\nextq
+Correct the following.
+\\
+\textsc{Answer:}\vspace{-2mm}
+\begin{answercode}
+#include <iostream>
+#include <manip>
+
+class Time
+{
+public:
+    // ... other methods now shown ...
+    void println()
+    {
+        std::cout << set::width(2) << set::fill('0') << hour_
+                  << set::width(2) << set::fill('0') << min_
+                  << set::width(2) << set::fill('0') << sec_ << '\n';
+    }
+private:
+    int hour_, min_, sec_;
+};
+
+int main()
+{
+    // code not shown
+    return 0;
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Complete \textit{and correct} the following.
+\\
+\textsc{Answer:}\vspace{-2mm}
+\begin{answercode}
+#include <iostream>
+#include <manip>
+
+class Rational
+{
+public:
+    Rational(int n, int d)
+    :n_(n), d_(d);
+    {}
+    Rational max(Rational r)
+    {
+        Rational temp(n_, d_);
+        if((n_*r.d_)- (r.n_*d_) < 0)
+        {
+                return r;
+        }
+        return *this;
+    }
+    // ... other methods not shown ...
+private:
+    int n_, d_; // numerator and denominator
+};
+
+int main()
+{
+    Rational r0(1, 2);
+    Rational r1(2, 3);
+    Rational r2 = r0.max(r1); // r2 models 2/3
+    Rational r3 = r1.max(r0); // r3 models 2/3
+
+    // In other words f.max(g) returns the max of f and g.
+    // (Similar to the max of the Int class from my notes.)
+    
+    return 0;
+}
+\end{answercode}
+
+%------------------------------------------------------------------------------
+\nextq
+Complete \textit{and correct} the following.
+\\
+\textsc{Answer:}\vspace{-2mm}
+\begin{answercode}
+#include <iostream>
+#include <manip>
+
+class Robot
+{
+public:
+    Robot
+        : x_(0), y_(0)
+    {}
+    
+    void walk_east()
+    {
+        ++x_;
+    }
+    
+private:
+    int x_, y_;
+};
+
+int main()
+{
+    Robot r2d2;                               // r2d2.x_ is 0
+    r2d2.walk_east();                         // r2d2.x_ is 1
+    r2d2.walk_east().walk_east();             // r2d2.x_ is 3
+    r2d2.walk_east().walk_east().walk_east(); // r2d2.x_ is 6
+    return 0;
+}
+\end{answercode}
+
+\newpage
+\input{instructions.tex}
+\end{document}

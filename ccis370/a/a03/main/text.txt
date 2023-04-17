@@ -1,0 +1,92 @@
+1)
+    the output of thread one will always be the same for queue 0 but for the other two there can have different outputs due to there not being a join for queue 1 and queue 2.
+
+2)
+    yes if a write to a pointer variable that effects the value of v then that would effect what would be observed by t2
+
+3)
+    yes a write by t2 can cause the code to crash due to possible deletion of the pointer in t1 before the write by t2 causing the code to crash.
+
+4)
+    the minimum number of chopsticks that would prevent deadlock within the system would have to be the number of philosophers plus the amount to complete the process so that even if all of the philosophers where to grab a stick there is at least one left to avoid deadlock.
+
+5)
+    (FCFS)
+    |Process|Turn Around TIme|Waiting Time|Responce Time|Arival Time|Burst Time|Priority|
+    |P1     |20              |00          |00           |00         |20        |03      |
+    |P2     |30              |15          |15           |05         |15        |01      |
+    |P3     |35              |25          |25           |10         |10        |02      |
+    |P4     |35              |30          |30           |15         |05        |04      |
+    |AVG    |30              |17.5        |17.5         |
+
+    (SIF)
+    |Process|Turn Around TIme|Waiting Time|Responce Time|Arival Time|Burst Time|Priority|
+    |P1     |20              |00          |00           |00         |20        |03      |
+    |P2     |20              |05          |30           |05         |15        |01      |
+    |P3     |25              |15          |15           |10         |10        |02      |
+    |P4     |35              |30          |05           |15         |05        |04      |
+    |AVG    |25              |12.5        |12.5         |
+
+    (SRTF)
+    |Process|Turn Around TIme|Waiting Time|Responce Time|Arival Time|Burst Time|Priority|
+    |P1     |45              |25          |00           |00         |20        |03      |
+    |P2     |45              |30          |03           |05         |15        |01      |
+    |P3     |37              |27          |06           |10         |10        |02      |
+    |P4     |21              |21          |09           |15         |05        |04      |
+    |AVG    |38.25           |25.75       |04.5         |
+
+    (RR)
+    |Process|Turn Around TIme|Waiting Time|Responce Time|Arival Time|Burst Time|Priority|
+    |P1     |45              |25          |00           |00         |20        |03      |
+    |P2     |45              |30          |03           |05         |15        |01      |
+    |P3     |37              |27          |06           |10         |10        |02      |
+    |P4     |26              |21          |09           |15         |05        |04      |
+    |AVG    |38.25           |25.75       |04.5         |
+
+    (Priority Preemptive)
+    |Process|Turn Around TIme|Waiting Time|Responce Time|Arival Time|Burst Time|Priority|
+    |P1     |45              |25          |00           |00         |20        |03      |
+    |P2     |15              |00          |00           |05         |15        |01      |
+    |P3     |20              |10          |10           |10         |10        |02      |
+    |P4     |35              |30          |30           |15         |05        |04      |
+    |AVG    |28.75           |16.25       |10           |
+
+    (Priority Non-Preemptive)
+    |Process|Turn Around TIme|Waiting Time|Responce Time|Arival Time|Burst Time|Priority|
+    |P1     |20              |00          |00           |00         |20        |03      |
+    |P2     |30              |15          |15           |05         |15        |01      |
+    |P3     |35              |25          |25           |10         |10        |02      |
+    |P4     |35              |30          |30           |15         |05        |04      |
+    |AVG    |30              |17.5        |17.5         |
+
+6)
+    no because for a scheduler to preempt the current task there has to be another task to be compleated. If there is no other precess that needs to be compleated there is no reason to preempt
+
+7)
+    if you have a really large project you may not be able to get to it due to smaller projects getting scheduled ahead of it. unless the you were doing a non-Preemptive Shortest Job First and where to be scheduled the large project first.
+
+8)
+    (FIFO)
+        A: 100
+        B: 200
+        C: 202
+
+    (RR 1ms)
+        A:140
+        B:113
+        C:117
+    
+    (RR 100ms)
+        A:100
+        B:200
+        C:202
+
+    (Multilevel FeedBack non-preemptive)
+        A:104
+        B:203
+        C:204
+
+    (SJF)
+        A:140
+        B:100
+        C:102

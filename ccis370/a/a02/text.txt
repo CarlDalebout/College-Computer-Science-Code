@@ -1,0 +1,14 @@
+1)
+	You do not get the same Hello statment due to threads being interupted but the return statment will happen in order.
+
+2)
+	The code may exit before the Hello Statment finish due to interuptions during the treads so the outputs very between 0-9 
+
+3)
+	the first thread will make progress while the second thread is waiting for input but depending on your ouput for the first statment the '.' will either wait to print until the user input or will print continuisly if you are flushing the printing buffer.
+
+4)
+	n is per-thread due to it being declared within the funtion rather then in the main function. 
+
+5)
+	The i and exitValue are shared values because they are being they are declared within main rather then in the function.
